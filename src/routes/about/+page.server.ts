@@ -1,2 +1,3 @@
-// eslint-disable-next-line no-console
-console.log(`only runs server`);
+export async function load(event) {
+	return await event.fetch('api/foo').then((data) => data.json());
+}
