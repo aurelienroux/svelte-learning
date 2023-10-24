@@ -1,5 +1,5 @@
 export function load() {
 	return {
-		layout: 'data from layout'
+		layout: 'data from main layout'
 	};
 }

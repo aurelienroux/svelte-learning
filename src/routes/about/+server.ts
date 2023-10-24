@@ -1,7 +1,6 @@
-console.log('server runs');
-
 export function load() {
+	console.log('server runs');
 	return {
-		aboutserver: 'data from server'
+		aboutserver: 'data from about server'
 	};
 }
