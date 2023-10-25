@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	export let data;
 </script>
 
-<h2>article: {$page.params.slug}</h2>
-<h2>article: {$page.data.layout}</h2>
+<h2>{data.postData?.title}</h2>
+<p>{@html data.postData?.content}</p>
