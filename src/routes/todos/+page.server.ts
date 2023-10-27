@@ -16,6 +16,9 @@ export const load = (async ({ cookies }) => {
 
 export const actions = {
 	create: async ({ cookies, request }) => {
+		// fake server lag
+		await new Promise((fulfil) => setTimeout(fulfil, 1000));
+
 		const data = await request.formData();
 
 		try {
@@ -29,6 +32,9 @@ export const actions = {
 	},
 
 	delete: async ({ cookies, request }) => {
+		// fake server lag
+		await new Promise((fulfil) => setTimeout(fulfil, 1000));
+
 		const data = await request.formData();
 
 		db.deleteTodo(cookies.get('userId'), data.get('id'));
