@@ -5,7 +5,7 @@
 <div class="centered">
 	<h1>todos</h1>
 
-	<form method="post">
+	<form method="POST" action="?/create">
 		<label>
 			add todo:
 			<input name="description" autocomplete="off" />
@@ -15,7 +15,11 @@
 	<ul class="todos">
 		{#each data.todos as todo (todo.id)}
 			<li>
-				{todo.description}
+				<form method="POST" action="?/delete">
+					<input type="hidden" name="id" value={todo.id} />
+					<span>{todo.description}</span>
+					<button aria-label="Mark as complete" />
+				</form>
 			</li>
 		{/each}
 	</ul>
@@ -35,11 +39,11 @@
 		flex: 1;
 	}
 
-	/* span {
+	span {
 		flex: 1;
-	} */
+	}
 
-	/* button {
+	button {
 		border: none;
 		background: url(./remove.svg) no-repeat 50% 50%;
 		background-size: 1rem 1rem;
@@ -48,13 +52,13 @@
 		aspect-ratio: 1;
 		opacity: 0.5;
 		transition: opacity 0.2s;
-	} */
+	}
 
-	/* button:hover {
+	button:hover {
 		opacity: 1;
-	} */
+	}
 
-	/* .saving {
+	.saving {
 		opacity: 0.5;
-	} */
+	}
 </style>

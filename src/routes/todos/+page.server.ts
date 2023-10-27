@@ -14,9 +14,15 @@ export const load = (async ({ cookies }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	default: async ({ cookies, request }) => {
+	create: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		db.createTodo(cookies.get('userId'), data.get('description'));
+	},
+
+	delete: async ({ cookies, request }) => {
+		const data = await request.formData();
+
+		db.deleteTodo(cookies.get('userId'), data.get('id'));
 	}
 };
