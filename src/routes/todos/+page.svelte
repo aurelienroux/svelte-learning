@@ -1,4 +1,7 @@
 <script>
+	import { enhance } from '$app/forms';
+	import { fly, slide } from 'svelte/transition';
+
 	export let data;
 	export let form;
 </script>
@@ -10,7 +13,7 @@
 		<p class="error">{form.error}</p>
 	{/if}
 
-	<form method="POST" action="?/create">
+	<form method="POST" action="?/create" use:enhance>
 		<label>
 			add todo:
 			<input name="description" autocomplete="off" value={form?.description ?? ''} />
@@ -19,7 +22,7 @@
 
 	<ul class="todos">
 		{#each data.todos as todo (todo.id)}
-			<li>
+			<li in:fly={{ y: 200 }} out:slide>
 				<form method="POST" action="?/delete">
 					<input required type="hidden" name="id" value={todo.id} />
 					<span>{todo.description}</span>
@@ -61,13 +64,10 @@
 
 	button:hover {
 		opacity: 1;
+		transition: opacity 0.2s;
 	}
 
 	.error {
 		color: red;
-	}
-
-	.saving {
-		opacity: 0.5;
 	}
 </style>
