@@ -1,14 +1,19 @@
 <script>
 	export let data;
+	export let form;
 </script>
 
 <div class="centered">
 	<h1>todos</h1>
 
+	{#if form?.error}
+		<p class="error">{form.error}</p>
+	{/if}
+
 	<form method="POST" action="?/create">
 		<label>
 			add todo:
-			<input name="description" autocomplete="off" />
+			<input name="description" autocomplete="off" value={form?.description ?? ''} />
 		</label>
 	</form>
 
@@ -16,7 +21,7 @@
 		{#each data.todos as todo (todo.id)}
 			<li>
 				<form method="POST" action="?/delete">
-					<input type="hidden" name="id" value={todo.id} />
+					<input required type="hidden" name="id" value={todo.id} />
 					<span>{todo.description}</span>
 					<button aria-label="Mark as complete" />
 				</form>
@@ -56,6 +61,10 @@
 
 	button:hover {
 		opacity: 1;
+	}
+
+	.error {
+		color: red;
 	}
 
 	.saving {

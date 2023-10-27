@@ -1,3 +1,4 @@
+import { fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import * as db from '$lib/server/database';
 
@@ -17,7 +18,14 @@ export const actions = {
 	create: async ({ cookies, request }) => {
 		const data = await request.formData();
 
-		db.createTodo(cookies.get('userId'), data.get('description'));
+		try {
+			db.createTodo(cookies.get('userId'), data.get('description'));
+		} catch (error) {
+			return fail(422, {
+				description: data.get('description'),
+				error: error.message
+			});
+		}
 	},
 
 	delete: async ({ cookies, request }) => {
